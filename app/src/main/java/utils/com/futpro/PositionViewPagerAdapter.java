@@ -48,6 +48,12 @@ public class PositionViewPagerAdapter extends PagerAdapter {
                 lineup.add(new PagerRow(form1[i]));
             }
 
+            else if(formation.equals("3-4-1-2")){
+
+                String[] form2 = {"ST", "ST", "CAM", "LM", "CM", "CM", "RM", "CB", "CB", "CB", "GK"};
+                lineup.add(new PagerRow(form2[i]));
+            }
+
             else if(formation.equals("4-3-3")) {
 
 
