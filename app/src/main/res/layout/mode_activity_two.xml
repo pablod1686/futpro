@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/activity_vertical_margin"
+    android:paddingEnd="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:layout_marginTop="50dp"
+    android:background="@drawable/fifa_mode"
+    >
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/activity_vertical_margin"
+        android:paddingEnd="@dimen/activity_vertical_margin"
+        android:paddingTop="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:elevation="15dp"
+
+
+            >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+
+                />
+
+
+            <com.pixelcan.inkpageindicator.InkPageIndicator
+
+                android:id="@+id/indicator"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="170dp"
+                app:ipi_dotDiameter="8dp"
+                app:ipi_dotGap="8dp"
+                app:ipi_animationDuration="320"
+                app:ipi_pageIndicatorColor="@android:color/darker_gray"
+                app:ipi_currentPageIndicatorColor="@android:color/holo_orange_light"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_marginTop="20dp"
+            android:elevation="15dp"
+            >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager2"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+
+                />
+
+
+
+            <com.pixelcan.inkpageindicator.InkPageIndicator
+                android:id="@+id/indicator2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="170dp"
+                app:ipi_dotDiameter="8dp"
+                app:ipi_dotGap="8dp"
+                app:ipi_animationDuration="320"
+                app:ipi_pageIndicatorColor="@android:color/darker_gray"
+                app:ipi_currentPageIndicatorColor="@android:color/holo_orange_light"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border"
+            android:elevation="15dp"
+            >
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager3"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+
+                />
+
+
+
+            <com.pixelcan.inkpageindicator.InkPageIndicator
+                android:id="@+id/indicator3"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="170dp"
+                app:ipi_dotDiameter="8dp"
+                app:ipi_dotGap="8dp"
+                app:ipi_animationDuration="320"
+                app:ipi_pageIndicatorColor="@android:color/darker_gray"
+                app:ipi_currentPageIndicatorColor="@android:color/holo_orange_light"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

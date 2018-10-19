@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FutPro</string>
+    <string name="action_settings">Settings</string>
+    <string name="Spin_Title">Select AI Level</string>
+    <string name="UserIntro">\Enter new user information below</string>
+    <string name="User">User Name</string>
+    <string name="Email">\@ Email</string>
+    <string name="Password">\Password</string>
+    <string name="Confirmation">\Confirm Password</string>
+    <string name="player_data">Please enter current FUT Data\n This will match you with the closest level opponent:</string>
+</resources>

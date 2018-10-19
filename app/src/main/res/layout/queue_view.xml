@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#263238">
+
+        <circle.CircularImageView
+            android:id="@+id/gamer_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            app:civ_border_width="1dp"
+            android:src="@drawable/gamer"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#20ffffff"
+            >
+
+            <TextView
+                android:id="@+id/gamerTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingStart="5dp"
+                android:text="diegoInk"
+                android:gravity="start"
+                android:textColor="#ffff00"
+
+                />
+
+            <TextView
+                android:id="@+id/current_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="W/W/D/D/W"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:textColor="#ffff00"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/challenge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Challenge"
+            android:gravity="center"
+            android:textColor="#ffff00"
+            android:background="@drawable/linearborder"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

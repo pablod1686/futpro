@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:title="Log out"
+        android:icon="@drawable/signoff"
+        android:state_checked="false"
+        />
+    <item
+        android:id="@+id/menu_admins"
+        android:title="Admin"
+        android:icon="@drawable/user_icon"
+        android:state_checked="false"
+        />
+
+    <item
+        android:id="@+id/menu_football"
+        android:title="Football"
+        android:icon="@drawable/soccer_ball_2"
+        android:state_checked="false"
+        />
+
+    <item
+        android:id="@+id/menu_slip"
+        android:title="Bet Slip"
+        android:icon="@drawable/reciept"
+        android:state_checked="false"
+        />
+
+    <item
+        android:id="@+id/menu_sport"
+        android:title="Sports"
+        android:icon="@drawable/sports"
+        android:state_checked="false"
+        />
+
+</menu>

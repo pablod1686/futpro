@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#263238">
+
+        <circle.CircularImageView
+            android:id="@+id/gamer_pic"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            app:civ_border_color="#ffff00"
+            app:civ_border_width="2dp"
+            android:src="@drawable/gamer"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#20ffffff"
+            >
+
+            <TextView
+                android:id="@+id/gamerTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingStart="5dp"
+                android:text="diegoInk"
+                android:gravity="start"
+                android:textColor="#ffff00"
+
+                />
+
+            <TextView
+                android:id="@+id/current_form"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="8sp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="W/W/D/D/W"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:textColor="#ffff00"
+                />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/accept_challenge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_add_circle_outline_black_24dp"
+            android:tint="#1DE9B6"
+
+            />
+
+        <ImageView
+            android:id="@+id/deny_challenge"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:src="@drawable/ic_highlight_off_black_24dp"
+            android:tint="#FF1744"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

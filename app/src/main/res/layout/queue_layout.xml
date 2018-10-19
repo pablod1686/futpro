@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fifa_mode"
+    android:layout_marginTop="50dp"
+    >
+
+
+
+
+
+        <LinearLayout
+
+            android:id="@+id/header_image"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@drawable/linearborder2"
+            >
+
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:paddingRight="5dp"
+                android:layout_weight="1"
+                android:textColor="#FFFF00"
+                android:fontFamily="cursive"
+                android:textStyle="bold"
+                android:text="Active Lobby"
+                android:id="@+id/Top_Events_Home" />
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    <ListView
+        android:id="@+id/list_queue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true"
+        android:dividerHeight="2dp"
+        >
+
+    </ListView>
+
+
+
+</RelativeLayout>

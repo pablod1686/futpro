@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#263238">
+
+        <TextView
+            android:id="@+id/player_rating"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="25sp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="95"
+            android:textColor="#ffff00"
+            android:gravity="center"
+            android:background="@drawable/active_dot"
+
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:background="#20ffffff"
+            >
+
+            <TextView
+                android:id="@+id/playername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:paddingStart="5dp"
+                android:gravity="start"
+                android:textColor="#ffff00"
+
+                />
+
+            <TextView
+                android:id="@+id/pos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="10sp"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:textColor="#ffff00"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/select_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Select"
+            android:gravity="center"
+            android:textColor="#ffff00"
+            android:background="@drawable/linearborder"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
