@@ -62,6 +62,7 @@ public class FUTSearchActivty extends AppCompatActivity{
     private String myJSON;
 
     private static final String TAG_RESULTS ="result";
+    private static final String TAG_KEY = "key";
     private static final String TAG_NAME = "name";
     private static final String TAG_RTG = "rtg";
     private static final String TAG_POS = "pos";
@@ -92,16 +93,11 @@ public class FUTSearchActivty extends AppCompatActivity{
         getData();
 
 
-        ArrayList<FUTPlayerAttributes> selectedPlayers = new ArrayList<>();
+
         database = new DatabaseHelper(this);
-        for(int i = 0; i < database.getFUTPlayers().size(); i++) {
-            selectedPlayers.add(new FUTPlayerAttributes(database.getFUTPlayers().get(i).getPlauerName(), database.getFUTPlayers().get(i).getPlayerRtg(), database.getFUTPlayers().get(i).getPlayerPOS()));
-        }
 
-
-
-            TextView player_count = findViewById(R.id.text_count);
-            player_count.setText(String.valueOf(selectedPlayers.size()));
+        TextView player_count = findViewById(R.id.text_count);
+        player_count.setText(String.valueOf(database.getFUTPlayers().size()));
 
 
         FloatingActionButton teamEdit = findViewById(R.id.view_formation);
@@ -117,6 +113,7 @@ public class FUTSearchActivty extends AppCompatActivity{
 
 
 
+
     }
 
 
@@ -124,7 +121,7 @@ public class FUTSearchActivty extends AppCompatActivity{
 
     private void filterATKPostions(final ArrayList<FUTPlayerAttributes> playerFilter) {
 
-        final String[] attackPos = new String[] {"ST", "CF", "LW", "RW"};
+        final String[] attackPos = new String[] {"ST", "CF", "LF", "RF", "LW", "RW"};
 
         final ArrayList<FUTPlayerAttributes> playerList = new ArrayList<>();
 
@@ -181,8 +178,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("ST")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -219,8 +216,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("CF")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -248,6 +245,82 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                         break;
 
+                                    case "LF":
+
+                                        if (text.isChecked()) {
+
+                                            text.setText("LF");
+                                            text.setBackgroundResource(R.drawable.border3);
+
+                                            if(playerFilter.get(x).getPlayerPOS().equals("LF")){
+
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                        playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
+
+
+
+                                            }
+
+
+                                        } else {
+
+                                            text.setText("LF");
+                                            text.setBackgroundResource(R.drawable.border2);
+
+                                            for(int j = 0 ; j < playerList.size(); j++){
+
+                                                if(playerList.get(j).getPlayerPOS().equals("LF")){
+
+                                                    playerList.remove(j);
+
+                                                }
+
+                                            }
+
+                                        }
+
+
+                                        break;
+
+                                    case "RF":
+
+                                        if (text.isChecked()) {
+
+                                            text.setText("RF");
+                                            text.setBackgroundResource(R.drawable.border3);
+
+                                            if(playerFilter.get(x).getPlayerPOS().equals("RF")){
+
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                        playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
+
+
+
+                                            }
+
+
+                                        } else {
+
+                                            text.setText("RF");
+                                            text.setBackgroundResource(R.drawable.border2);
+
+                                            for(int j = 0 ; j < playerList.size(); j++){
+
+                                                if(playerList.get(j).getPlayerPOS().equals("RF")){
+
+                                                    playerList.remove(j);
+
+                                                }
+
+                                            }
+
+                                        }
+
+
+                                        break;
+
                                     case "LW":
 
                                         if (text.isChecked()) {
@@ -257,8 +330,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("LW")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -294,8 +367,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("RW")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -410,8 +483,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("CAM")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -448,8 +521,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("LM")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -486,8 +559,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("RM")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -523,8 +596,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("CM")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -560,8 +633,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("CDM")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(),playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -680,8 +753,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("CB")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -718,8 +791,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("LB")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -756,8 +829,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("RB")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -793,8 +866,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("LWB")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -830,8 +903,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("RWB")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(),playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -867,8 +940,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                                             if(playerFilter.get(x).getPlayerPOS().equals("GK")){
 
-                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                                                playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(),
+                                                        playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(),playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                                                         playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -939,8 +1012,8 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                 if (playerFilter.get(x).getPlauerName().contains(setPlayerName) && setPlayerName.length() > 3) {
 
-                    playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPace(),
-                            playerFilter.get(x).getPlayerClub(), playerFilter.get(x).getPlayerLeague(), playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
+                    playerList.add(new FUTPlayerAttributes(playerFilter.get(x).getKey(), playerFilter.get(x).getPlauerName(), playerFilter.get(x).getPlayerRtg(), playerFilter.get(x).getPlayerPOS(), playerFilter.get(x).getPlayerClub(),
+                            playerFilter.get(x).getPlayerLeague(),  playerFilter.get(x).getPlayerNation(), playerFilter.get(x).getPace(), playerFilter.get(x).getShot(), playerFilter.get(x).getPace(),
                             playerFilter.get(x).getDribble(), playerFilter.get(x).getDefense(), playerFilter.get(x).getPhysical(), playerFilter.get(x).getWeakFoot(), playerFilter.get(x).getSkill()));
 
 
@@ -964,6 +1037,7 @@ public class FUTSearchActivty extends AppCompatActivity{
 
     private void syncedMatchList() throws ParseException {
 
+        String key;
         String name;
         String rtg;
         String pos;
@@ -987,6 +1061,7 @@ public class FUTSearchActivty extends AppCompatActivity{
 
                 JSONObject c = gamer.getJSONObject(i);
 
+                key = c.getString(TAG_KEY);
                 name = c.getString(TAG_NAME);
                 rtg = c.getString(TAG_RTG);
                 pos = c.getString(TAG_POS);
@@ -1006,7 +1081,7 @@ public class FUTSearchActivty extends AppCompatActivity{
                 //SharedPreferences sharedPreferences = getSharedPreferences("UserData", Context.MODE_PRIVATE);
                 //final String loadUser = sharedPreferences.getString("userEmail", DEFAULT);
 
-                attributes.add(new FUTPlayerAttributes(name, rtg, pos, club, league, nation, pace, shot, pass, dribble, defense, physical, weakFoot, skill));
+                attributes.add(new FUTPlayerAttributes(key, name, rtg, pos, club, league, nation, pace, shot, pass, dribble, defense, physical, weakFoot, skill));
                 filterATKPostions(attributes);
                 filterMIDPostions(attributes);
                 filterDEFPostions(attributes);
