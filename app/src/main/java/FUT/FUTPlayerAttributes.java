@@ -6,6 +6,11 @@ package FUT;
 
 public class FUTPlayerAttributes {
 
+    private String key;
+    private String gamerTag;
+    private String formation;
+    private String formPos;
+    private int posNum;
     private String plauerName;
     private String playerRtg;
     private String playerPOS;
@@ -52,11 +57,106 @@ public class FUTPlayerAttributes {
 
     }
 
+    public FUTPlayerAttributes(String key, String plauerName, String playerRtg, String playerPOS, String playerClub, String playerLeague, String playerNation, String pace,
+                               String shot, String pass, String dribble, String defense, String physical, String weakFoot, String skill){
+
+        this.key = key;
+        this.plauerName = plauerName;
+        this.playerRtg = playerRtg;
+        this.playerPOS = playerPOS;
+        this.playerClub =  playerClub;
+        this.playerLeague = playerLeague;
+        this.playerNation = playerNation;
+        this.pace = pace;
+        this.shot = shot;
+        this.pass = pass;
+        this.dribble = dribble;
+        this.defense = defense;
+        this.physical = physical;
+        this.weakFoot = weakFoot;
+        this.skill = skill;
+
+
+    }
+
+    public FUTPlayerAttributes(String formation, String formPos,String plauerName, String playerRtg, String playerPOS, String playerClub, String playerLeague, String playerNation, String pace,
+                               String shot, String pass, String dribble, String defense, String physical, String weakFoot, String skill){
+
+        this.formation = formation;
+        this.formPos = formPos;
+        this.plauerName = plauerName;
+        this.playerRtg = playerRtg;
+        this.playerPOS = playerPOS;
+        this.playerClub =  playerClub;
+        this.playerLeague = playerLeague;
+        this.playerNation = playerNation;
+        this.pace = pace;
+        this.shot = shot;
+        this.pass = pass;
+        this.dribble = dribble;
+        this.defense = defense;
+        this.physical = physical;
+        this.weakFoot = weakFoot;
+        this.skill = skill;
+
+
+    }
+
+    public FUTPlayerAttributes(String gamerTag, String formation, String formPos, int posNum ,String plauerName, String playerRtg, String playerPOS, String playerClub, String playerLeague, String playerNation, String pace,
+                               String shot, String pass, String dribble, String defense, String physical, String weakFoot, String skill){
+
+        this.gamerTag = gamerTag;
+        this.formation = formation;
+        this.formPos = formPos;
+        this.posNum = posNum;
+        this.plauerName = plauerName;
+        this.playerRtg = playerRtg;
+        this.playerPOS = playerPOS;
+        this.playerClub =  playerClub;
+        this.playerLeague = playerLeague;
+        this.playerNation = playerNation;
+        this.pace = pace;
+        this.shot = shot;
+        this.pass = pass;
+        this.dribble = dribble;
+        this.defense = defense;
+        this.physical = physical;
+        this.weakFoot = weakFoot;
+        this.skill = skill;
+
+
+    }
+
+    public FUTPlayerAttributes(String key, String gamerTag, String formation, String formPos, int posNum ,String plauerName, String playerRtg, String playerPOS, String playerClub, String playerLeague, String playerNation, String pace,
+                               String shot, String pass, String dribble, String defense, String physical, String weakFoot, String skill){
+
+        this.key = key;
+        this.gamerTag = gamerTag;
+        this.formation = formation;
+        this.formPos = formPos;
+        this.posNum = posNum;
+        this.plauerName = plauerName;
+        this.playerRtg = playerRtg;
+        this.playerPOS = playerPOS;
+        this.playerClub =  playerClub;
+        this.playerLeague = playerLeague;
+        this.playerNation = playerNation;
+        this.pace = pace;
+        this.shot = shot;
+        this.pass = pass;
+        this.dribble = dribble;
+        this.defense = defense;
+        this.physical = physical;
+        this.weakFoot = weakFoot;
+        this.skill = skill;
+
+
+    }
+
 
     public String getPlauerName(){
         return plauerName;
     }
-
 
     public String getPlayerRtg() {
         return playerRtg;
@@ -111,4 +211,23 @@ public class FUTPlayerAttributes {
     }
 
 
+    public String getFormation() {
+        return formation;
+    }
+
+    public String getFormPos() {
+        return formPos;
+    }
+
+    public int getPosNum() {
+        return posNum;
+    }
+
+    public String getGamerTag() {
+        return gamerTag;
+    }
+
+    public String getKey() {
+        return key;
+    }
 }
