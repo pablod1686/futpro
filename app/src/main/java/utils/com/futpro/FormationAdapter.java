@@ -98,6 +98,8 @@ public class FormationAdapter extends BaseAdapter {
             public void onClick(View v) {
 
 
+                holder.form.setTextColor(Color.GREEN);
+
                 SharedPreferences sharedPreferences = v.getContext().getSharedPreferences("formation", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("formationSet", temp.formation);
@@ -105,9 +107,11 @@ public class FormationAdapter extends BaseAdapter {
                 editor.apply();
 
 
+
                 Intent intent = new Intent(v.getContext(), TeamEditActivty.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 v.getContext().startActivity(intent);
+
 
 
 
