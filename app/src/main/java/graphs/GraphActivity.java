@@ -54,11 +54,11 @@ public class GraphActivity extends Activity{
 
 
         private TeamFormation[] vertices = {
-                new TeamFormation("LW", 275, 150), new TeamFormation("ST", 515, 100), new TeamFormation("RW", 775, 150),
-                new TeamFormation("LM,", 275, 350), new TeamFormation("CAM", 515, 275), new TeamFormation("RM", 775, 350),
-                new TeamFormation("LB", 200, 500), new TeamFormation("RB", 850, 500),
-                new TeamFormation("CB", 380, 520), new TeamFormation("CB", 640, 520),
-                new TeamFormation("GK", 515, 620)
+                new TeamFormation("LW", 125, 50), new TeamFormation("ST", 320, 25), new TeamFormation("RW", 510, 50),
+                new TeamFormation("LM,", 125, 150), new TeamFormation("CAM", 320, 125), new TeamFormation("RM", 510, 150),
+                new TeamFormation("LB", 75, 250), new TeamFormation("RB", 555, 250),
+                new TeamFormation("CB", 200, 275), new TeamFormation("CB", 435, 275),
+                new TeamFormation("GK", 320, 300)
         };
 
         private int[][] edges = {
@@ -83,10 +83,12 @@ public class GraphActivity extends Activity{
         private Graph<? extends  Displayable> graph;
         private Context context;
 
+
+
         public FomationView(Context context) {
             super(context);
             this.context = context;
-            setGraph(teamFormationGraph);
+            //setGraph(teamFormationGraph);
 
         }
 
@@ -99,8 +101,8 @@ public class GraphActivity extends Activity{
         @Override
         public void onDraw(Canvas canvas){
             super.onDraw(canvas);
-            //paint.setColor(Color.LTGRAY);
-            //paint.setStrokeWidth(6);
+            paint.setColor(Color.parseColor("#ffff00"));
+            paint.setStrokeWidth(6);
 
             //ColorFilter filter = new PorterDuffColorFilter(ContextCompat.getColor(context, R.color.color), PorterDuff.Mode.SRC_IN);
             //textPaint.setColorFilter(filter);
@@ -128,11 +130,10 @@ public class GraphActivity extends Activity{
             for (int i = 0; i < graph.getSize(); i++){
                 int x = vertices.get(i).getX();
                 int y = vertices.get(i).getY();
-                String name = vertices.get(i).getName();
-
-
-                canvas.drawBitmap(resizedBitmap,x-25, y-3, textPaint);
-                canvas.drawText(name, x - 15,  y -25, textPaint);
+                //String name = vertices.get(i).getName();
+                //canvas.drawBitmap(resizedBitmap,x-25, y-3, paint);
+                canvas.drawCircle(x ,y + 10,15,paint);
+                //canvas.drawText(name, x - 15,  y -25, textPaint);
 
 
             }
@@ -141,7 +142,7 @@ public class GraphActivity extends Activity{
 
         }
 
-        private Graph<TeamFormation> teamFormationGraph = new UnweightedGraph<>(edges, vertices);
+        //private Graph<TeamFormation> teamFormationGraph = new UnweightedGraph<>(edges, vertices);
 
 
 
