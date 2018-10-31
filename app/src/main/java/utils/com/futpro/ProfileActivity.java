@@ -258,6 +258,11 @@ public class ProfileActivity extends AppCompatActivity {
                     TextView gamerName =  findViewById(R.id.gamerTag);
                     gamerName.setText(gamerTag);
 
+                    SharedPreferences tagPref = getSharedPreferences("GamerTagID", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = tagPref.edit();
+                    editor.putString("userTag", gamerTag);
+                    editor.apply();
+
                     TextView eRating = findViewById(R.id.gamer_rank);
                     eRating.setText(eloRating);
 
