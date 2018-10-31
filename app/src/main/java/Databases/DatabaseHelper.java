@@ -24,16 +24,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
 
     // Database Name
-    private static final String DATABASE_NAME = "BetSlipDataBaseIV";
+    private static final String DATABASE_NAME = "FUTDatabaseXIX";
 
     // Table Names
     private static final String TABLE_FUT = "FUT_PLAYER_TBL";
 
     // Common column names
     private static final String KEY_ID = "fut_id";
+
+    private static final String TAG_KEY = "player_id";
 
     private static final String TAG_NAME = "name";
     private static final String TAG_RTG = "rtg";
@@ -59,13 +61,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String CREATE_TABLE = "CREATE TABLE " + TABLE_FUT + "("
-                + KEY_ID + " INTEGER PRIMARY KEY,"+ TAG_NAME + " TEXT," + TAG_RTG + " TEXT," + TAG_POS +  " TEXT" + ")";
-
-                /*
+                + KEY_ID + " INTEGER PRIMARY KEY,"+  TAG_KEY + " TEXT," + TAG_NAME + " TEXT," + TAG_RTG + " TEXT," + TAG_POS +  " TEXT,"
                 + TAG_CLUB +  " TEXT," + TAG_LEAGUE +  " TEXT," + TAG_NATION +  " TEXT,"
                 + TAG_PACE +  " TEXT," + TAG_SHOT +  " TEXT," + TAG_PASS +  " TEXT," + TAG_DRIBBLE +  " TEXT,"
                 + TAG_DEFENSE +  " TEXT," + TAG_PHYSICAL +  " TEXT," + TAG_WEAKFOOT +  " TEXT," + TAG_SKILL +  " TEXT" + ")";
-                */
+
 
         // creating required tables
         db.execSQL(CREATE_TABLE);
@@ -87,13 +87,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
 
+        values.put(TAG_KEY, attributes.getKey());
         values.put(TAG_NAME, attributes.getPlauerName());
         values.put(TAG_RTG, attributes.getPlayerRtg());
         values.put(TAG_POS, attributes.getPlayerPOS());
-        //values.put(TAG_CLUB, );
-        //values.put(TAG_LEAGUE, );
-        //values.put(TAG_NATION,);
-        //values.put(TAG_PACE, );
+        values.put(TAG_CLUB, attributes.getPlayerClub());
+        values.put(TAG_LEAGUE, attributes.getPlayerLeague());
+        values.put(TAG_NATION, attributes.getPlayerNation());
+        values.put(TAG_PACE, attributes.getPace());
+        values.put(TAG_SHOT, attributes.getShot());
+        values.put(TAG_PASS, attributes.getPass());
+        values.put(TAG_DRIBBLE, attributes.getDribble());
+        values.put(TAG_DEFENSE, attributes.getDefense());
+        values.put(TAG_PHYSICAL, attributes.getPhysical());
+        values.put(TAG_WEAKFOOT, attributes.getWeakFoot());
+        values.put(TAG_SKILL, attributes.getSkill());
+
+
 
         // Inserting Row
         db.insert(TABLE_FUT, null, values);
@@ -113,7 +123,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
 
-                FUTPlayerAttributes attributes = new FUTPlayerAttributes(cursor.getString(1), cursor.getString(2), cursor.getString(3));
+                FUTPlayerAttributes attributes = new FUTPlayerAttributes(cursor.getString(1), cursor.getString(2), cursor.getString(3),
+                        cursor.getString(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getString(8), cursor.getString(9),
+                        cursor.getString(10), cursor.getString(11), cursor.getString(12),cursor.getString(13), cursor.getString(14), cursor.getString(15));
 
                 attributesList.add(attributes);
 
@@ -121,6 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         db.close();
+        cursor.close();
         // return coefficient list
         return attributesList;
     }
@@ -133,6 +146,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         data.delete(TABLE_FUT, whereClause, whereArgs);
         data.close();
+
+    }
+
+    public void deleteAllFromTbl(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Select All Query
+        db.delete(TABLE_FUT, null, null);
+        db.execSQL("delete from " + TABLE_FUT);
 
     }
 
