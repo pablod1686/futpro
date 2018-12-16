@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,183 +16,383 @@
 
         >
 
+
         <LinearLayout
-            android:id="@+id/formation_contruct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:layout_marginBottom="10dp"
-            android:orientation="horizontal"
             android:layout_above="@id/team_container"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/formation_contruct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+
+                >
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager_positions"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:background="#80212121"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+
+                        />
+
+
+                    <com.pixelcan.inkpageindicator.InkPageIndicator
+
+                        android:id="@+id/indicator"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="100dp"
+                        app:ipi_dotDiameter="5dp"
+                        app:ipi_dotGap="5dp"
+                        app:ipi_animationDuration="320"
+                        app:ipi_pageIndicatorColor="@android:color/darker_gray"
+                        app:ipi_currentPageIndicatorColor="@android:color/holo_orange_light"/>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="140dp"
+                        android:orientation="vertical"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/position_pointers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="FORMATION"
+                                android:textSize="20sp"
+                                android:textColor="#ffffff"
+                                android:fontFamily="sans-serif-condensed"
+                                />
+
+                            <TextView
+                                android:id="@+id/formation_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:textSize="20sp"
+                                android:textColor="#ffffff"
+                                android:layout_marginEnd="10dp"
+                                android:fontFamily="sans-serif-condensed"
+                                android:gravity="center"
+                                android:background="#80212121"
+                                />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="STARTERS"
+                                android:textSize="20sp"
+                                android:textColor="#ffffff"
+                                android:fontFamily="sans-serif-condensed"
+                                />
+
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/starters"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:background="#80212121"
+
+                                />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+
+                    >
+
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="#80212121"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+
+                        >
+
+                        <RelativeLayout
+                            android:id="@+id/fut_card"
+                            android:layout_width="185dp"
+                            android:layout_height="230dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            >
+
+                            <ImageView
+                                android:layout_width="185dp"
+                                android:layout_height="240dp"
+                                android:paddingBottom="5dp"
+                                android:id="@+id/player_stats"
+                                android:layout_gravity="center"
+
+                                />
+
+
+                        </RelativeLayout>
+
+                        <!--
+
+                        <TextView
+                            android:id="@+id/playername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            />
+
+                        <TextView
+                            android:id="@+id/playerrating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/playerposition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+
+
+                            />
+
+                        <TextView
+                            android:id="@+id/playerclub"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+
+
+                            />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            >
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="20dp"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+
+                                >
+
+
+                                <TextView
+                                    android:id="@+id/pace_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#ffffff"
+                                    tools:ignore="NestedWeights" />
+
+                                <TextView
+                                    android:id="@+id/shot_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#ffffff"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/pass_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#ffffff"
+                                    />
+
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                >
+
+
+
+                                <TextView
+                                    android:id="@+id/dribble_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textColor="#ffffff"
+                                    android:gravity="center"
+                                    tools:ignore="NestedWeights" />
+
+                                <TextView
+                                    android:id="@+id/defense_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#ffffff"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/physical_stats"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="#ffffff"
+                                    />
+
+
+
+                            </LinearLayout>
+
+
+
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/selectedFormation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+
+                            />
+
+                        <TextView
+                            android:id="@+id/formationPosition"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ffffff"
+                            />
+
+                            -->
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 >
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager_positions"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="#80212121"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-
-                    />
-
-
-                <com.pixelcan.inkpageindicator.InkPageIndicator
-
-                    android:id="@+id/indicator"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="120dp"
-                    app:ipi_dotDiameter="8dp"
-                    app:ipi_dotGap="8dp"
-                    app:ipi_animationDuration="320"
-                    app:ipi_pageIndicatorColor="@android:color/darker_gray"
-                    app:ipi_currentPageIndicatorColor="@android:color/holo_orange_light"/>
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="160dp"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     >
 
-                    <LinearLayout
-                        android:id="@+id/position_pointers"
+                    <ListView
+                        android:id="@+id/formation_list"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-
-                        >
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="FORMATION"
-                            android:textSize="20sp"
-                            android:textColor="#ffffff"
-                            android:fontFamily="sans-serif-condensed"
-                            />
-
-                        <TextView
-                            android:id="@+id/formation_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:textSize="20sp"
-                            android:textColor="#ffffff"
-                            android:fontFamily="sans-serif-condensed"
-                            android:gravity="center"
-                            android:background="#80212121"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="STARTERS"
-                            android:textSize="20sp"
-                            android:textColor="#ffffff"
-                            android:fontFamily="sans-serif-condensed"
-                            />
-
-
-                        <android.support.v7.widget.RecyclerView
-                            android:id="@+id/starters"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:background="#80212121"
-
-                            />
-
-
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="10dp"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:background="#80212121"
+                        android:background="@drawable/fifa_mode"
+
                         >
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Player Name"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rating"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Position"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            />
+                    </ListView>
+
+                    <RelativeLayout
+                        android:id="@+id/formation_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginTop="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/campo_2"
+
+
+                        >
 
 
 
-                    </LinearLayout>
-
+                    </RelativeLayout>
 
 
 
                 </LinearLayout>
 
 
-
-
-
-
-            </RelativeLayout>
-
-
-
-
-            <ListView
-                android:id="@+id/formation_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/fifa_mode"
-
-                >
-
-
-            </ListView>
-
-
+            </LinearLayout>
 
 
         </LinearLayout>
-
-
-
 
 
         <LinearLayout
