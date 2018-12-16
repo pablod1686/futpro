@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 public class QueueActivity extends AppCompatActivity {
 
-    public ArrayList<PlayerCard> copy =  new ArrayList<>();
+    public ArrayList<Opponent> copy =  new ArrayList<>();
 
     private String myJSON;
 
@@ -50,6 +50,7 @@ public class QueueActivity extends AppCompatActivity {
     private static final String TAG_LEVEL ="lvl";
     private static final String TAG_CONSOLE ="con";
     private static final String TAG_ELO ="elo";
+    private static final String TAG_SEARCH ="search";
 
     private  String id;
     private  String email;
@@ -119,6 +120,7 @@ public class QueueActivity extends AppCompatActivity {
         String lvl;
         String console;
         String elo;
+        String search;
         JSONArray gamer;
 
 
@@ -142,6 +144,7 @@ public class QueueActivity extends AppCompatActivity {
                 amount = c.getString(TAG_AMT);
                 console = c.getString(TAG_CONSOLE);
                 elo = c.getString(TAG_ELO);
+                search = c.getString(TAG_SEARCH);
 
                 //Log.d("Mode Data", "Data: " + tag + "-" + gMode + "-" + gAmt + "-" + gElo );
 
@@ -150,7 +153,7 @@ public class QueueActivity extends AppCompatActivity {
                 if(!gamerTag.equals(tag) && mode.equals(gMode) && amount.equals(gAmt) && elo.equals(gElo) ) {
 
 
-                        copy.add(new PlayerCard(gamerID, gamerEmail, gamerTag, lobbyDt, mode, amount, team, lvl, console, elo));
+                        copy.add(new Opponent(gamerID, gamerEmail, gamerTag, lobbyDt, mode, amount, team, lvl, console, elo, search));
 
 
                 }
@@ -239,3 +242,5 @@ public class QueueActivity extends AppCompatActivity {
 
 
     }
+
+
