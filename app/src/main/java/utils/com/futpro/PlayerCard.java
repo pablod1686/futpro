@@ -1,5 +1,6 @@
 package utils.com.futpro;
 
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -22,12 +23,28 @@ class PlayerCard {
     private String console;
     private String gamerLvl;
     private String elo;
+    private String search;
 
 
     public  PlayerCard(){
 
 
     }
+
+    public PlayerCard(String gamerTag) {
+
+        this.gamerTag = gamerTag;
+
+    }
+
+    public PlayerCard(String elo,String gamerTag) {
+
+
+        this.elo = elo;
+        this.gamerTag = gamerTag;
+
+    }
+
 
     public PlayerCard(String team, String gamerTag, String rating, String console) {
 
@@ -73,10 +90,32 @@ class PlayerCard {
 
     }
 
-    public PlayerCard( String gamerID, String gamerEmail, String gamerTag, String team, String win, String draw, String loss, String rating, String level, String console, String elo) {
 
-        this.gamerID = gamerID;
-        this.gamerEmail = gamerEmail;
+
+
+
+
+    public PlayerCard(String email, String gamerTag, String date, String modeType, String modeStk, String team, String level, String console, String elo, String search) {
+
+
+        this.gamerEmail = email;
+        this.gamerTag = gamerTag;
+        this.lobbyDate = date;
+        this.mode = modeType;
+        this.stake = modeStk;
+        this.teamName = team;
+        this.gamerLvl = level;
+        this.console = console;
+        this.elo = elo;
+        this.search = search;
+
+    }
+
+
+    public PlayerCard(String id, String email, String gamerTag,String team, String win, String draw, String loss, String rating, String level, String console, String elo) {
+
+        this.gamerID = id;
+        this.gamerEmail = email;
         this.gamerTag = gamerTag;
         this.teamName = team;
         this.w = win;
@@ -86,20 +125,6 @@ class PlayerCard {
         this.levelAI = level;
         this.console = console;
         this.elo = elo;
-
-    }
-
-    public PlayerCard(String ID, String email, String gamerTag, String date, String modeType, String modeStk, String team, String level, String console, String elo) {
-
-        this.gamerID = ID;
-        this.gamerEmail = email;
-        this.gamerTag = gamerTag;
-        this.lobbyDate = date;
-        this.mode = modeType;
-        this.stake = modeStk;
-        this.teamName = team;
-        this.gamerLvl = level;
-        this.console = console;
 
     }
 
@@ -197,6 +222,23 @@ class PlayerCard {
     }
 
 
+    public String getLobbyDate() {
+        return lobbyDate;
+    }
 
+    public String getSearch() {
+        return search;
+    }
+}
 
+class MyComparator implements Comparator<PlayerCard> {
+    public int compare(PlayerCard a, PlayerCard b) {
+        Integer aLvl, bLvl;
+
+        aLvl = Integer.parseInt(a.getElo());
+        bLvl = Integer.parseInt(b.getElo());
+
+        return bLvl.compareTo(aLvl);
+    }
+    // No need to override equals.
 }
