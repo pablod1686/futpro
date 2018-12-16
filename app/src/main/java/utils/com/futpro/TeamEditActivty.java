@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.loopj.android.http.AsyncHttpClient;
@@ -67,6 +68,8 @@ public class TeamEditActivty extends AppCompatActivity {
     ViewPager mPager;
     InkPageIndicator mIndicator;
 
+    String loadFormation;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class TeamEditActivty extends AppCompatActivity {
         setContentView(R.layout.edit_team_layout);
 
         sharedPreferences = getSharedPreferences("formation", Context.MODE_PRIVATE);
-        final String loadFormation = sharedPreferences.getString("formationSet", DEFAULT);
+        loadFormation = sharedPreferences.getString("formationSet", DEFAULT);
         final int formationPos = sharedPreferences.getInt("position", DEFAULTPOS);
 
         formPosPrefrences = getSharedPreferences("formationPosition", Context.MODE_PRIVATE);
@@ -114,6 +117,9 @@ public class TeamEditActivty extends AppCompatActivity {
         SharedPreferences tagPref = getSharedPreferences("GamerTagID", Context.MODE_PRIVATE);
         final String loadTag = tagPref.getString("userTag", DEFAULT);
 
+        SharedPreferences teamPref = getSharedPreferences("GamerTeam", Context.MODE_PRIVATE);
+        final String loadTeam = teamPref.getString("gamerTeam", DEFAULT);
+
 
         TextView formation_name = findViewById(R.id.formation_name);
         formation_name.setText(loadFormation);
@@ -121,7 +127,7 @@ public class TeamEditActivty extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                submitTeam(loadUser,loadTag,loadFormation);
+                submitTeam(loadUser,loadTag,loadTeam,loadFormation);
                 Toast.makeText(TeamEditActivty.this, "Team data submitted", Toast.LENGTH_SHORT).show();
 
             }
@@ -171,64 +177,7 @@ public class TeamEditActivty extends AppCompatActivity {
 
         if(isPosSelected(origPos, pagerPos) != null) {
 
-            switch (isPosSelected(origPos, pagerPos)) {
-                case "James Rodriguez":
-
-                    card.setImageResource(R.drawable.james_rodriguez);
-
-
-                    break;
-                case "Cristiano Ronaldo":
-
-                    card.setImageResource(R.drawable.cristiano);
-
-                    break;
-                case "Juan Cuadrado":
-
-                    card.setImageResource(R.drawable.cuadrado);
-
-                    break;
-                case "Hugo Lloris":
-
-                    card.setImageResource(R.drawable.lloris);
-
-                    break;
-                case "Davinson Sanchez":
-
-                    card.setImageResource(R.drawable.sanchez);
-
-                    break;
-                case "Leroy Sane":
-
-                    card.setImageResource(R.drawable.sane);
-
-                    break;
-                case "Serge Gnabry":
-
-                    card.setImageResource(R.drawable.gnabry);
-
-                    break;
-                case "Jan Vertonghen":
-
-                    card.setImageResource(R.drawable.vertonghen);
-
-                    break;
-                case "Kieran Trippier":
-
-                    card.setImageResource(R.drawable.trippier);
-
-                    break;
-                case "Benjamin Mendy":
-
-                    card.setImageResource(R.drawable.mendy);
-
-                    break;
-                case "Paulo Dybala":
-
-                    card.setImageResource(R.drawable.dybala);
-
-                    break;
-            }
+            Glide.with(this).load(isPosSelected(origPos, pagerPos)).into(card);
 
         }
 
@@ -250,7 +199,8 @@ public class TeamEditActivty extends AppCompatActivity {
                     database.getFUTPlayers().get(i).getPlayerClub(), database.getFUTPlayers().get(i).getPlayerLeague(), database.getFUTPlayers().get(i).getPlayerNation(),
                     database.getFUTPlayers().get(i).getPace(), database.getFUTPlayers().get(i).getShot(), database.getFUTPlayers().get(i).getPass(),
                     database.getFUTPlayers().get(i).getDribble(), database.getFUTPlayers().get(i).getDefense(), database.getFUTPlayers().get(i).getPhysical(),
-                    database.getFUTPlayers().get(i).getWeakFoot(), database.getFUTPlayers().get(i).getSkill()));
+                    database.getFUTPlayers().get(i).getWeakFoot(), database.getFUTPlayers().get(i).getSkill(), database.getFUTPlayers().get(i).getUrl(),
+                    database.getFUTPlayers().get(i).getUrl_mini()));
         }
 
         teamAdapter = new TeamAdapter(selectedPlayers, loadFormation, origPos, pagerPos,TeamEditActivty.this);
@@ -288,145 +238,17 @@ public class TeamEditActivty extends AppCompatActivity {
 
 
 
-        RelativeLayout v =  findViewById(R.id.formation_view);
-        GraphActivity.FomationView myView = new GraphActivity.FomationView(this);
-
-        switch (loadFormation) {
-            case "3-1-4-2":
-
-                myView.setGraph(formation3142());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-
-                break;
-            case "3-4-1-2":
-
-                myView.setGraph(formation3412());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "3-4-2-1":
-
-                myView.setGraph(formation3421());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "3-4-3":
-
-                myView.setGraph(formation343());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-
-            case "3-5-2":
-
-                myView.setGraph(formation352());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-1-2-1-2":
-
-                myView.setGraph(formation41212());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-1-2-1-2(2)":
-
-                myView.setGraph(formation41212_2());
-                v.getLayoutParams().height = 400;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-1-3-2":
-
-                myView.setGraph(formation4132());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-
-            case "4-1-4-1":
-
-                myView.setGraph(formation4141());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-2-2-2":
-
-                myView.setGraph(formation4222());
-                v.getLayoutParams().height = 400;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-2-3-1":
-
-                myView.setGraph(formation4231());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-2-3-1(2)":
-
-                myView.setGraph(formation4231_2());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-2-4":
-
-                myView.setGraph(formation424());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-3-1-2":
-
-                myView.setGraph(formation4312());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-3-2-1":
-
-                myView.setGraph(formation4321());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-            case "4-3-3":
-
-                myView.setGraph(formation433());
-                v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
-                v.setBackgroundResource(R.drawable.campo_2);
-                v.addView(myView);
-
-                break;
-        }
 
 
 
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+
+        viewFormation();
     }
 
 
@@ -449,14 +271,160 @@ public class TeamEditActivty extends AppCompatActivity {
     }
 
 
-    public Graph<TeamFormation> formation3142 (){
+    public void viewFormation(){
+
+        RelativeLayout v =  findViewById(R.id.formation_view);
+        v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+        Log.d("Layout" , "Height: " + v.getHeight());
+        GraphActivity.FomationView myView = new GraphActivity.FomationView(this);
+
+        switch (loadFormation) {
+            case "3-1-4-2":
+
+
+
+                myView.setGraph(formation3142(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+
+                break;
+            case "3-4-1-2":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation3412(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "3-4-2-1":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation3421(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "3-4-3":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation343(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+
+            case "3-5-2":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation352(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-1-2-1-2":
+
+
+                // v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation41212(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-1-2-1-2(2)":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation41212_2(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-1-3-2":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4132(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+
+            case "4-1-4-1":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4141(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-2-2-2":
+
+                // v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4222(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-2-3-1":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4231(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-2-3-1(2)":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4231_2(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-2-4":
+                // v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation424(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-3-1-2":
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4312(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-3-2-1":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation4321(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+            case "4-3-3":
+
+                //v.getLayoutParams().height = RelativeLayout.LayoutParams.MATCH_PARENT;
+                myView.setGraph(formation433(v.getWidth(),v.getHeight()));
+                v.setBackgroundResource(R.drawable.campo_2);
+                v.addView(myView);
+
+                break;
+        }
+
+
+    }
+
+
+    public Graph<TeamFormation> formation3142 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 210, 100), new TeamFormation("ST", 310, 100),
-                new TeamFormation("LM", 100, 300), new TeamFormation("CM", 210, 300), new TeamFormation("CM,", 310, 300), new TeamFormation("RM", 410, 300),
-                new TeamFormation("CDM", 260, 500),
-                new TeamFormation("CB", 100, 650), new TeamFormation("CB", 260, 650), new TeamFormation("CB", 410, 650),
-                new TeamFormation("GK", 260, 780)
+
+                new TeamFormation("ST",(int)(parentWidth * 0.4f), (int) (parentHeight * 0.15f)), new TeamFormation("ST", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.25f), (int) (parentHeight * 0.3f)), new TeamFormation("CM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.3f)), new TeamFormation("CM,", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.3f)), new TeamFormation("RM", (int)(parentWidth * 0.75f), (int) (parentHeight * 0.3f)),
+                new TeamFormation("CDM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.5f)),
+                new TeamFormation("CB", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -477,14 +445,14 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation3412 (){
+    public Graph<TeamFormation> formation3412 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
-                new TeamFormation("CAM", 320, 100),
-                new TeamFormation("LM", 125, 150), new TeamFormation("CM", 265, 150), new TeamFormation("CM,", 370, 150), new TeamFormation("RM", 510, 150),
-                new TeamFormation("CB", 230, 250), new TeamFormation("CB", 320, 250), new TeamFormation("CB", 410, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST",(int)(parentWidth * 0.4f), (int) (parentHeight * 0.15f)), new TeamFormation("ST", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("CAM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.35f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.25f), (int) (parentHeight * 0.5f)), new TeamFormation("CM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.5f)), new TeamFormation("CM,", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.5f)), new TeamFormation("RM", (int)(parentWidth * 0.75f), (int) (parentHeight * 0.5f)),
+                new TeamFormation("CB", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -505,14 +473,14 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation3421 (){
+    public Graph<TeamFormation> formation3421 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 320, 50),
-                new TeamFormation("LF", 285, 100), new TeamFormation("RF", 350, 100),
-                new TeamFormation("LM", 125, 150), new TeamFormation("CM", 265, 150), new TeamFormation("CM,", 370, 150), new TeamFormation("RM", 510, 150),
-                new TeamFormation("CB", 230, 250), new TeamFormation("CB", 320, 250), new TeamFormation("CB", 410, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("LF", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.25f)), new TeamFormation("RF", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.25f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.25f), (int) (parentHeight * 0.4f)), new TeamFormation("CM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.4f)), new TeamFormation("CM,", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.4f)), new TeamFormation("RM", (int)(parentWidth * 0.75f), (int) (parentHeight * 0.4f)),
+                new TeamFormation("CB", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -533,14 +501,14 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation343 (){
+    public Graph<TeamFormation> formation343 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 320, 50),
-                new TeamFormation("LW", 200, 100), new TeamFormation("RW", 435, 100),
-                new TeamFormation("LM", 125, 150), new TeamFormation("CM", 265, 150), new TeamFormation("CM,", 370, 150), new TeamFormation("RM", 510, 150),
-                new TeamFormation("CB", 230, 250), new TeamFormation("CB", 320, 250), new TeamFormation("CB", 410, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("LW", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.2f)), new TeamFormation("RW", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.2f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.25f), (int) (parentHeight * 0.4f)), new TeamFormation("CM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.4f)), new TeamFormation("CM,", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.4f)), new TeamFormation("RM", (int)(parentWidth * 0.75f), (int) (parentHeight * 0.4f)),
+                new TeamFormation("CB", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -561,14 +529,14 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation352 (){
+    public Graph<TeamFormation> formation352 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
-                new TeamFormation("CAM", 320, 100),
-                new TeamFormation("LM", 125, 150), new TeamFormation("CDM", 265, 175), new TeamFormation("CDM,", 370, 175), new TeamFormation("RM", 510, 150),
-                new TeamFormation("CB", 230, 250), new TeamFormation("CB", 320, 250), new TeamFormation("CB", 410, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST",(int)(parentWidth * 0.4f), (int) (parentHeight * 0.15f)), new TeamFormation("ST", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("CAM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.3f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.25f), (int) (parentHeight * 0.4f)), new TeamFormation("CM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.4f)), new TeamFormation("CM,", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.4f)), new TeamFormation("RM", (int)(parentWidth * 0.75f), (int) (parentHeight * 0.4f)),
+                new TeamFormation("CB", (int)(parentWidth * 0.3f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)), new TeamFormation("CB", (int)(parentWidth * 0.7f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -589,15 +557,15 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation41212(){
+    public Graph<TeamFormation> formation41212( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
-                new TeamFormation("CAM", 320, 100),
-                new TeamFormation("LM", 125, 150),  new TeamFormation("RM", 510, 150),
-                new TeamFormation("CDM", 320, 200),
-                new TeamFormation("LB", 75, 250), new TeamFormation("CB", 200, 275), new TeamFormation("CB", 435, 275), new TeamFormation("RB", 555, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST",(int)(parentWidth * 0.4f), (int) (parentHeight * 0.15f)), new TeamFormation("ST", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("CAM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.35f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.5f)),  new TeamFormation("RM", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.5f)),
+                new TeamFormation("CDM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("LB", (int)(parentWidth * 0.2f), (int) (parentHeight * 0.8f)), new TeamFormation("CB", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.8f)), new TeamFormation("CB", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.8f)), new TeamFormation("RB", (int)(parentWidth * 0.8f), (int) (parentHeight * 0.8f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -618,15 +586,15 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation41212_2 (){
+    public Graph<TeamFormation> formation41212_2 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
-                new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
-                new TeamFormation("CAM", 320, 100),
-                new TeamFormation("CM", 235, 150),  new TeamFormation("CM", 400, 150),
-                new TeamFormation("CDM", 320, 200),
-                new TeamFormation("LB", 75, 250), new TeamFormation("CB", 200, 275), new TeamFormation("CB", 435, 275), new TeamFormation("RB", 555, 250),
-                new TeamFormation("GK", 320, 325)
+                new TeamFormation("ST",(int)(parentWidth * 0.4f), (int) (parentHeight * 0.15f)), new TeamFormation("ST", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.15f)),
+                new TeamFormation("CAM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.35f)),
+                new TeamFormation("LM", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.5f)),  new TeamFormation("RM", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.5f)),
+                new TeamFormation("CDM", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.65f)),
+                new TeamFormation("LB", (int)(parentWidth * 0.2f), (int) (parentHeight * 0.8f)), new TeamFormation("CB", (int)(parentWidth * 0.4f), (int) (parentHeight * 0.8f)), new TeamFormation("CB", (int)(parentWidth * 0.6f), (int) (parentHeight * 0.8f)), new TeamFormation("RB", (int)(parentWidth * 0.8f), (int) (parentHeight * 0.8f)),
+                new TeamFormation("GK", (int)(parentWidth * 0.5f), (int) (parentHeight * 0.9f))
         };
 
         int[][] edges = {
@@ -647,7 +615,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4132(){
+    public Graph<TeamFormation> formation4132( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
@@ -675,7 +643,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4141(){
+    public Graph<TeamFormation> formation4141( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 320, 50),
@@ -703,7 +671,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4231(){
+    public Graph<TeamFormation> formation4231( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 320, 50),
@@ -732,7 +700,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4231_2(){
+    public Graph<TeamFormation> formation4231_2( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 320, 50),
@@ -761,7 +729,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4222(){
+    public Graph<TeamFormation> formation4222( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
@@ -788,7 +756,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation424(){
+    public Graph<TeamFormation> formation424( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
@@ -816,7 +784,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4312(){
+    public Graph<TeamFormation> formation4312( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("ST", 285, 50), new TeamFormation("ST", 350, 50),
@@ -844,7 +812,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation4321(){
+    public Graph<TeamFormation> formation4321( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
 
@@ -873,7 +841,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return teamFormationGraph;
     }
 
-    public Graph<TeamFormation> formation433 (){
+    public Graph<TeamFormation> formation433 ( int parentWidth,int parentHeight){
 
         TeamFormation[] vertices = {
                 new TeamFormation("LW", 125, 50), new TeamFormation("ST", 320, 25), new TeamFormation("RW", 510, 50),
@@ -913,7 +881,7 @@ public class TeamEditActivty extends AppCompatActivity {
 
             if(data.getFormPos().equals(pos) && data.getPosNum() == posNum){
 
-                return data.getPlauerName();
+                return data.getUrl();
 
             }
         }
@@ -921,7 +889,7 @@ public class TeamEditActivty extends AppCompatActivity {
         return  null;
     }
 
-    public void submitTeam(String emaiil, String tag, String formation){
+    public void submitTeam(String emaiil, String tag, String team, String formation){
 
         DatabaseHelperII getTeam = new DatabaseHelperII(TeamEditActivty.this);
 
@@ -954,6 +922,7 @@ public class TeamEditActivty extends AppCompatActivity {
 
             map.put("email", emaiil);
             map.put("tag", tag);
+            map.put("team", team);
             map.put("formation",formation);
             map.put("chain1", chain.toString());
             map.put("chain2", chain2.toString());
@@ -974,8 +943,6 @@ public class TeamEditActivty extends AppCompatActivity {
 
             //params.put("singleBet", list);
             //client.post("http://betlogic.co/FUTPRO/insert_multiple_gamer_data.php", params, new AsyncHttpResponseHandler());
-
-
 
 
 
