@@ -102,6 +102,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             map.put("rating", data.getGamerLvl());
                             map.put("console", data.getConsole());
                             map.put("elo", data.getElo());
+                            map.put("search", "Custom");
 
 
                             json.add(map);
@@ -118,6 +119,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             String elo;
                             String mode = "Single Match";
                             String stk = "5";
+                            String search = "Custom";
                             Intent queue =  new Intent(v.getContext(), QueueActivity.class);
 
                             id = data.getGamerID();
@@ -131,6 +133,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             queue.putExtra("Elo", elo);
                             queue.putExtra("Mode", mode);
                             queue.putExtra("Stk", stk);
+                            queue.putExtra("Search", search);
 
                             v.getContext().startActivity(queue);
 
@@ -148,6 +151,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             map.put("rating", data.getGamerLvl());
                             map.put("console", data.getConsole());
                             map.put("elo", data.getElo());
+                            map.put("search", "Custom");
 
 
                             json.add(map);
@@ -172,6 +176,7 @@ public class ViewPagerAdapter extends PagerAdapter {
                             map.put("rating", data.getGamerLvl());
                             map.put("console", data.getConsole());
                             map.put("elo", data.getElo());
+                            map.put("search", "Custom");
 
 
                             json.add(map);
@@ -189,6 +194,135 @@ public class ViewPagerAdapter extends PagerAdapter {
 
                 }
 
+
+            }
+        });
+
+        TextView random =  view.findViewById(R.id.random);
+        random.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date now = new Date();
+                final AsyncHttpClient client = new AsyncHttpClient();
+                final RequestParams params = new RequestParams();
+                final ArrayList<HashMap<String, String>> json = new ArrayList<>();
+                final HashMap<String, String> map = new HashMap<>();
+                Gson gson;
+                String list;
+
+                for(PlayerCard data: userLobbyData) {
+
+                    switch (position) {
+
+                        case 0:
+
+                            map.put("id", data.getGamerID());
+                            map.put("email", data.getGamerEmail());
+                            map.put("tag", data.getGamerTag());
+                            map.put("date", formatter.format(now));
+                            map.put("mode", "Single Match");
+                            map.put("stake", "5");
+                            map.put("team", data.getTeamName());
+                            map.put("rating", data.getGamerLvl());
+                            map.put("console", data.getConsole());
+                            map.put("elo", data.getElo());
+                            map.put("search", "Random");
+
+
+                            json.add(map);
+                            gson = new GsonBuilder().create();
+                            list = gson.toJson(json);
+
+
+                            params.put("lobbyData", list.replaceAll("\\[", "").replaceAll("\\]", ""));
+                            client.post("http://betlogic.co/FUTPRO/insert_lobby_data.php", params, new AsyncHttpResponseHandler());
+
+                            String id;
+                            String email;
+                            String tag;
+                            String elo;
+                            String mode = "Single Match";
+                            String stk = "5";
+                            String search = "Random";
+                            String team;
+                            Intent queue =  new Intent(v.getContext(), MatchActivity.class);
+
+                            id = data.getGamerID();
+                            email = data.getGamerEmail();
+                            tag = data.getGamerTag();
+                            elo = data.getElo();
+                            team = data.getTeamName();
+
+                            queue.putExtra("ID", id);
+                            queue.putExtra("Email", email);
+                            queue.putExtra("Tag", tag);
+                            queue.putExtra("Elo", elo);
+                            queue.putExtra("Mode", mode);
+                            queue.putExtra("Stk", stk);
+                            queue.putExtra("Search", search);
+                            queue.putExtra("Team", team);
+
+
+                            v.getContext().startActivity(queue);
+
+                            break;
+
+                        case 1:
+
+                            map.put("id", data.getGamerID());
+                            map.put("email", data.getGamerEmail());
+                            map.put("tag", data.getGamerTag());
+                            map.put("date", formatter.format(now));
+                            map.put("mode", "Best of Three");
+                            map.put("stake", "10");
+                            map.put("team", data.getTeamName());
+                            map.put("rating", data.getGamerLvl());
+                            map.put("console", data.getConsole());
+                            map.put("elo", data.getElo());
+                            map.put("search", "Random");
+
+
+                            json.add(map);
+                            gson = new GsonBuilder().create();
+                            list = gson.toJson(json);
+
+
+                            params.put("lobbyData", list.replaceAll("\\[", "").replaceAll("\\]", ""));
+                            client.post("http://betlogic.co/FUTPRO/insert_lobby_data.php", params, new AsyncHttpResponseHandler());
+
+                            break;
+
+                        case 2:
+
+                            map.put("id", data.getGamerID());
+                            map.put("email", data.getGamerEmail());
+                            map.put("tag", data.getGamerTag());
+                            map.put("date", formatter.format(now));
+                            map.put("mode", "League Mode");
+                            map.put("stake", "20");
+                            map.put("team", data.getTeamName());
+                            map.put("rating", data.getGamerLvl());
+                            map.put("console", data.getConsole());
+                            map.put("elo", data.getElo());
+                            map.put("search", "Random");
+
+
+                            json.add(map);
+                            gson = new GsonBuilder().create();
+                            list = gson.toJson(json);
+
+
+                            params.put("lobbyData", list.replaceAll("\\[", "").replaceAll("\\]", ""));
+                            client.post("http://betlogic.co/FUTPRO/insert_lobby_data.php", params, new AsyncHttpResponseHandler());
+
+                            break;
+
+
+                    }
+
+                }
 
             }
         });
