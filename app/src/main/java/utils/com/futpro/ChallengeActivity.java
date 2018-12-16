@@ -49,6 +49,7 @@ public class ChallengeActivity extends AppCompatActivity {
     private static final String TAG_ID_2 = "id_2";
     private static final String TAG_EMAIL_2 = "em_2";
     private static final String TAG_GAMER_2 = "tag_2";
+    private static final String TAG_TEAM_2 = "team";
     private static final String TAG_ELO_2 = "elo_2";
     private static final String TAG_MODE ="mode";
     private static final String TAG_AMT ="stk";
@@ -106,6 +107,7 @@ public class ChallengeActivity extends AppCompatActivity {
         String amount;
         String gamerTag2;
         String gamerID2;
+        String gamerTeam;
         String elo2;
         String gamerEmail2;
         JSONArray gamer;
@@ -129,6 +131,7 @@ public class ChallengeActivity extends AppCompatActivity {
                 //elo1 = c.getString(TAG_ELO_1);
                 gamerID2 = c.getString(TAG_ID_2);
                 gamerTag2 = c.getString(TAG_GAMER_2);
+                gamerTeam = c.getString(TAG_TEAM_2);
                 //elo2 = c.getString(TAG_ELO_2);
                 gamerEmail2 = c.getString(TAG_EMAIL_2);
                 mode = c.getString(TAG_MODE);
@@ -139,7 +142,7 @@ public class ChallengeActivity extends AppCompatActivity {
 
                 if(!gamerEmail1.equals(userEmail) && gamerEmail2.equals(userEmail)) {
 
-                    copy.add(new Challenge(key, gamerID1, gamerEmail1, gamerTag1, gamerID2, gamerEmail2, gamerTag2, mode, amount));
+                    copy.add(new Challenge(key, gamerID1, gamerEmail1, gamerTag1, gamerID2, gamerEmail2, gamerTag2, gamerTeam, mode, amount));
 
                 }
 
