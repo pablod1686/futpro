@@ -13,10 +13,13 @@ public class Challenge {
     private String opponentID;
     private String opponentEmail;
     private String opponentTag;
+    private String opponentTeam;
     private String modeType;
     private String modeStake;
+    private String pTag;
+    private String pStatus;
 
-    public Challenge(String pairKey, String gamerID, String gamerEmail, String gamerTag, String opponentID, String opponentEmail, String opponentTag, String modeType, String modeStake){
+    public Challenge(String pairKey, String gamerID, String gamerEmail, String gamerTag, String opponentID, String opponentEmail, String opponentTag, String opponentTeam, String modeType, String modeStake){
 
         this.pairKey = pairKey;
         this.gamerID = gamerID;
@@ -25,8 +28,26 @@ public class Challenge {
         this.opponentID =  opponentID;
         this.opponentEmail =  opponentEmail;
         this.opponentTag = opponentTag;
+        this.opponentTeam = opponentTeam;
         this.modeType =  modeType;
         this.modeStake =  modeStake;
+
+    }
+
+    public Challenge(String pairKey, String gamerID, String gamerEmail, String gamerTag, String opponentID, String opponentEmail, String opponentTag, String opponentTeam, String modeType, String modeStake, String pTag, String pStatus){
+
+        this.pairKey = pairKey;
+        this.gamerID = gamerID;
+        this.gamerEmail = gamerEmail;
+        this.gamerTag = gamerTag;
+        this.opponentID =  opponentID;
+        this.opponentEmail =  opponentEmail;
+        this.opponentTag = opponentTag;
+        this.opponentTeam = opponentTeam;
+        this.modeType =  modeType;
+        this.modeStake =  modeStake;
+        this.pTag = pTag;
+        this.pStatus = pStatus;
 
     }
 
@@ -75,4 +96,16 @@ public class Challenge {
         return modeStake;
     }
 
+    public String getOpponentTeam() {
+        return opponentTeam;
+    }
+
+
+    public String getpStatus() {
+        return pStatus;
+    }
+
+    public String getpTag() {
+        return pTag;
+    }
 }
