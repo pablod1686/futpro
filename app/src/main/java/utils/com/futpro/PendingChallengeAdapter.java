@@ -1,6 +1,8 @@
 package utils.com.futpro;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +25,16 @@ class PendingRow{
     String tag;
     String email;
     String ID;
+    String team;
 
 
 
-    PendingRow(String tag, String email, String ID)
+    PendingRow(String tag, String email, String ID, String team)
     {
         this.tag = tag;
         this.email = email;
         this.ID = ID;
+        this.team = team;
 
 
     }
@@ -56,7 +60,7 @@ public class PendingChallengeAdapter extends BaseAdapter {
         for (int i = 0; i < gamers.size(); i++) {
 
 
-            list.add(new PendingRow(gamers.get(i).getGamerTag(), gamers.get(i).getGamerEmail(), gamers.get(i).getGamerID()));
+            list.add(new PendingRow(gamers.get(i).getGamerTag(), gamers.get(i).getGamerEmail(), gamers.get(i).getGamerID(), gamers.get(i).getOpponentTeam()));
 
 
         }
@@ -106,6 +110,20 @@ public class PendingChallengeAdapter extends BaseAdapter {
         final PendingRow temp = list.get(position);
 
         holder.gamerTag.setText(temp.tag);
+        holder.gamerTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+                Intent viewOppoenentTeam =  new Intent(v.getContext(), OpponentTeamActivity.class);
+                viewOppoenentTeam.putExtra("rivalEmail",temp.email);
+                viewOppoenentTeam.putExtra("rivalTeam", temp.team);
+                v.getContext().startActivity(viewOppoenentTeam);
+
+
+            }
+        });
 
 
 
