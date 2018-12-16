@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -36,11 +39,13 @@ class AttributesRow{
         String physical;
         String weakFoot;
         String skill;
+        String url;
+        String mini;
 
 
 
     AttributesRow(String pKey, String name, String rtg, String pos,  String club, String league, String nation, String pace, String shot,
-            String pass, String dribble, String defense, String physical, String weakFoot, String skill) {
+            String pass, String dribble, String defense, String physical, String weakFoot, String skill, String url, String mini) {
 
 
         this.pKey = pKey;
@@ -58,6 +63,8 @@ class AttributesRow{
         this.physical = physical;
         this.weakFoot = weakFoot;
         this.skill = skill;
+        this.url = url;
+        this.mini = mini;
 
     }
 
@@ -82,7 +89,8 @@ public class PlayerAttributesAdapter extends BaseAdapter {
 
             list.add(new AttributesRow(players.get(i).getKey(), players.get(i).getPlauerName(), players.get(i).getPlayerRtg(), players.get(i).getPlayerPOS(), players.get(i).getPlayerClub(),
                     players.get(i).getPlayerLeague(), players.get(i).getPlayerNation(), players.get(i).getPace(), players.get(i).getShot(), players.get(i).getPass(),
-                    players.get(i).getDribble(), players.get(i).getDefense(), players.get(i).getPhysical(), players.get(i).getWeakFoot(), players.get(i).getSkill()));
+                    players.get(i).getDribble(), players.get(i).getDefense(), players.get(i).getPhysical(), players.get(i).getWeakFoot(), players.get(i).getSkill(),
+                    players.get(i).getUrl(), players.get(i).getUrl_mini()));
 
 
         }
@@ -119,7 +127,7 @@ public class PlayerAttributesAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.name = row.findViewById(R.id.playername);
             holder.pos = row.findViewById(R.id.pos);
-            holder.rtg = row.findViewById(R.id.player_rating);
+            holder.card = row.findViewById(R.id.mini_card);
             holder.select = row.findViewById(R.id.select_player);
 
 
@@ -135,7 +143,9 @@ public class PlayerAttributesAdapter extends BaseAdapter {
 
         holder.name.setText(temp.name);
         holder.pos.setText(temp.pos + " | " + temp.club);
-        holder.rtg.setText(temp.rtg);
+
+        Glide.with(context).load(temp.mini).into(holder.card);
+        //holder.card.setImageResource(temp.mini);
 
         holder.select.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +155,7 @@ public class PlayerAttributesAdapter extends BaseAdapter {
 
                 DatabaseHelper database = new DatabaseHelper(v.getContext());
                 database.addFUTPlayers(new FUTPlayerAttributes(temp.pKey , temp.name, temp.rtg, temp.pos, temp.club, temp.league, temp.nation, temp.pace, temp.shot,
-                        temp.pass, temp.dribble, temp.defense, temp.physical, temp.weakFoot, temp.skill));
+                        temp.pass, temp.dribble, temp.defense, temp.physical, temp.weakFoot, temp.skill, temp.url, temp.mini));
 
 
 
@@ -160,7 +170,7 @@ public class PlayerAttributesAdapter extends BaseAdapter {
 
 
         public TextView name;
-        public TextView rtg;
+        public ImageView card;
         public TextView pos;
         public TextView select;
 
