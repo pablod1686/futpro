@@ -94,6 +94,25 @@
         </activity>
 
 
+        <activity
+
+            android:name=".OpponentTeamActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+        <activity
+
+            android:name=".TestActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
+
+
+        <service android:name="profile.services" />
+
     </application>
 
 </manifest>
