@@ -3,6 +3,7 @@ package utils.com.futpro;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Path;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,14 +48,16 @@ class QueueRow{
     String tag;
     String email;
     String ID;
+    String teamName;
 
 
 
-    QueueRow(String tag, String email, String ID)
+    QueueRow(String tag, String email, String ID, String teamName)
     {
         this.tag = tag;
         this.email = email;
         this.ID = ID;
+        this.teamName = teamName;
 
 
     }
@@ -66,13 +69,13 @@ public class QueueAdapter extends BaseAdapter{
 
 
     private ArrayList<QueueRow> list;
-    private ArrayList<PlayerCard> opponentData;
+    private ArrayList<Opponent> opponentData;
     private String userID, userEmail, userTag, userElo;
     private Context context;
 
 
 
-    public QueueAdapter(Context c, ArrayList<PlayerCard> gamers, String userID, String userEmail, String userTag, String userElo)  {
+    public QueueAdapter(Context c, ArrayList<Opponent> gamers, String userID, String userEmail, String userTag, String userElo)  {
 
         context = c;
         list = new ArrayList<>();
@@ -85,7 +88,7 @@ public class QueueAdapter extends BaseAdapter{
         for (int i = 0; i < gamers.size(); i++) {
 
 
-            list.add(new QueueRow(gamers.get(i).getGamerTag(), gamers.get(i).getGamerEmail(), gamers.get(i).getGamerID()));
+            list.add(new QueueRow(gamers.get(i).getTag(), gamers.get(i).getEmail(), gamers.get(i).getID(), gamers.get(i).getTeamName()));
 
 
         }
@@ -147,21 +150,22 @@ public class QueueAdapter extends BaseAdapter{
                 Gson gson;
                 String list;
 
-                for(PlayerCard data: opponentData){
+                for(Opponent data: opponentData){
 
-                    if(temp.tag.equals(data.getGamerTag())) {
+                    if(temp.tag.equals(data.getTag())) {
 
-                    Log.d("Mode", "Data: " + userID + "-" + userEmail + "-" + userTag + "-" + data.getGamerTag() + "-" + data.getMode());
+                    Log.d("Mode", "Data: " + userID + "-" + userEmail + "-" + userTag + "-" + data.getTag() + "-" + data.getModeType());
 
                         map.put("id_1", userID);
                         map.put("em_1", userEmail);
                         map.put("tag_1", userTag);
                         //map.put("elo_1", userElo);
-                        map.put("id_2", data.getGamerID());
-                        map.put("em_2", data.getGamerEmail());
-                        map.put("tag_2", data.getGamerTag());
+                        map.put("id_2", data.getID());
+                        map.put("em_2", data.getEmail());
+                        map.put("tag_2", data.getTag());
+                        map.put("team", data.getTeamName());
                         //map.put("elo2", data.getElo());
-                        map.put("mode", data.getMode());
+                        map.put("mode", data.getModeType());
                         map.put("stk", data.getStake());
 
                         json.add(map);
