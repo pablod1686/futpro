@@ -188,6 +188,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -415,6 +416,7 @@ public class ProfileActivity extends AppCompatActivity {
         String elo;
         JSONArray gamer;
 
+        String userTeam = null;
 
         try {
 
@@ -445,6 +447,7 @@ public class ProfileActivity extends AppCompatActivity {
                     copy.add(new PlayerCard(gamerID, gamerEmail, gamerTag, team, fifaWins, fifaDraws, fifaLoss, teamRating, computerLvl, console, elo));
                     SearchMatch searchMatch = new SearchMatch();
                     getUser(searchMatch.calculateTeamRating(copy));
+                    userTeam = team;
                     //searchMatch.rankGroups();
                     //searchMatch.pickNRandom();
 
@@ -458,6 +461,10 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
+            SharedPreferences sharedPreferences = getSharedPreferences("GamerTeam", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("gamerTeam", userTeam);
+            editor.apply();
 
         } catch (JSONException e) {
             e.printStackTrace();
